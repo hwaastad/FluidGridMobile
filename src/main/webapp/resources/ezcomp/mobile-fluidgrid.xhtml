@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:poue="http://primefaces.org/ui/extensions"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="indata"/>
+        <cc:attribute name="options"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <poue:fluidGrid id="fluidGrid" value="#{cc.attrs.indata}" var="data" resizeBound="true" hGutter="20" widgetVar="fluidGridWdgt" fitWidth="true">
+            <poue:fluidGridItem type="registercode" id="registercode">
+                <div class="dynaFormLabel">
+                    <p:outputLabel for="code" value="#{data.label}"/>
+                </div>
+                <h:inputText id="code" value="#{data.value.value}" required="#{data.required}" title="#{data.value.regexp}">
+                    <f:validator id="regCodeId" validatorId="registerCodeValidator"/>
+                    <f:attribute name="pattern" value="#{data.value.regexp}"/>
+                </h:inputText>
+                <p:message for="code"/>
+            </poue:fluidGridItem>
+            <poue:fluidGridItem type="input" id="input">
+                <div class="dynaFormLabel">
+                    <p:outputLabel for="in" value="#{data.label}"/>
+                </div>
+                <h:inputText id="in" value="#{data.value.value}" required="#{data.required}" title="#{data.value.regexp}">
+                    <f:validator id="extendedVal" validatorId="extendedRegexpValidator"/>
+                    <f:attribute name="pattern" value="#{data.value.regexp}"/>
+                    <f:attribute name="mandatory" value="#{data.required}"/>
+                </h:inputText>
+                <p:message for="in"/>
+            </poue:fluidGridItem>
+        </poue:fluidGrid>
+    </cc:implementation>
+</html>

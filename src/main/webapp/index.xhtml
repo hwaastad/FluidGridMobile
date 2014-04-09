@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/templates/mobileTemplate.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:pom="http://primefaces.org/mobile"
+                xmlns:ezcomp="http://java.sun.com/jsf/composite/ezcomp"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="metadata">
+        <f:metadata>
+        </f:metadata>
+    </ui:define>
+    <ui:define name="content">
+        <pom:page title="Page">
+            <pom:view id="main">
+                <pom:header title="Main"/>
+                <pom:content>
+                    <h:form id="mainForm">
+                        <p:dataList type="inset">
+                            <p:commandLink value="Start registration" action="#{registerController.prepareNewContact()}" update=":registerForm"/>
+                        </p:dataList>
+                    </h:form>
+                </pom:content>
+            </pom:view>
+            <pom:view id="register">
+                <pom:header title="Register">
+                    <f:facet name="left"><p:button value="Go Back" icon="back" href="#main?reverse=true"/></f:facet>
+                </pom:header>
+                <pom:content>
+                    <h:form id="registerForm">
+                        <ezcomp:mobile-fluidgrid indata="#{registerController.gridItems}" id="test"/>
+                        <p:commandButton id="registerButton" value="Create"  update="@form" action="#{registerController.saveNewMobile()}"/>
+                    </h:form>
+                </pom:content>
+            </pom:view>
+            <pom:view id="welcome">
+                <pom:header title="Welcome">
+                    <f:facet name="left"><p:button value="Go Back" icon="back" href="#main?reverse=true"/></f:facet>
+                </pom:header>
+                <pom:content>
+
+                </pom:content>
+
+            </pom:view>
+            <pom:view id="error">
+                <pom:header title="Error"/>
+                <pom:content>
+
+                </pom:content>
+
+            </pom:view>
+        </pom:page>
+    </ui:define>
+</ui:composition>
+
