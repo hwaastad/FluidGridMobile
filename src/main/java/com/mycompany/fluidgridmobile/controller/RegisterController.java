@@ -10,8 +10,13 @@ import com.mycompany.fluidgridmobile.model.UserAttribute;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import org.omnifaces.cdi.ViewScoped;
+import org.primefaces.extensions.model.dynaform.DynaFormControl;
+import org.primefaces.extensions.model.dynaform.DynaFormLabel;
+import org.primefaces.extensions.model.dynaform.DynaFormModel;
+import org.primefaces.extensions.model.dynaform.DynaFormRow;
 import org.primefaces.extensions.model.fluidgrid.FluidGridItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,25 +32,45 @@ public class RegisterController implements Serializable {
     private static final long serialVersionUID = -5446594424265253118L;
     private static final Logger LOG = LoggerFactory.getLogger(RegisterController.class);
     private List<FluidGridItem> gridItems;
+    private DynaFormModel model;
+
+    @PostConstruct
+    public void init() {
+        model = new DynaFormModel();
+    }
 
     public String prepareNewContact() {
-        LOG.debug("PREPARE NEW....");
+        LOG.info("PREPARE NEW....");
         gridItems = new ArrayList<>();
-        
+        model = new DynaFormModel();
+
 //        FluidGridItem item3 = new FluidGridItem("sad","input");
 //        gridItems.add(item3);
-        
+        UserAttribute att2 = new UserAttribute("code", true, "ert");
+        FluidFormField f2 = new FluidFormField(att2, true, null);
+        f2.setLabel(att2.getAttribute());
+        FluidGridItem item2 = new FluidGridItem(f2, "registercode");
+        gridItems.add(item2);
+
         UserAttribute att1 = new UserAttribute("firstName", true, "[a-z]{3}");
         FluidFormField f = new FluidFormField(att1, true, null);
         f.setLabel(att1.getAttribute());
         FluidGridItem item = new FluidGridItem(f, "input");
         gridItems.add(item);
 
-        UserAttribute att2 = new UserAttribute("code", true, "ert");
-        FluidFormField f2 = new FluidFormField(att2, true, null);
-        f2.setLabel(att2.getAttribute());
-        FluidGridItem item2 = new FluidGridItem(f2, "registercode");
-        gridItems.add(item2);
+        // dynaform
+        //model = new DynaFormModel();
+        DynaFormRow row = model.createRegularRow();
+        DynaFormLabel label = row.addLabel(att1.getAttribute(), 1, 1);
+        row = model.createRegularRow();
+        DynaFormControl control = row.addControl(f, "input", 1, 1);
+        label.setForControl(control);
+
+        row = model.createRegularRow();
+        label = row.addLabel(att2.getAttribute(), 1, 1);
+        row = model.createRegularRow();
+        DynaFormControl control2 = row.addControl(f2, "registercode", 1, 1);
+        label.setForControl(control2);
 
         return "pm:register";
     }
@@ -60,6 +85,15 @@ public class RegisterController implements Serializable {
 
     public void setGridItems(List<FluidGridItem> gridItems) {
         this.gridItems = gridItems;
+    }
+
+    public DynaFormModel getModel() {
+        LOG.info("Getting model....");
+        return model;
+    }
+
+    public void setModel(DynaFormModel model) {
+        this.model = model;
     }
 
 }

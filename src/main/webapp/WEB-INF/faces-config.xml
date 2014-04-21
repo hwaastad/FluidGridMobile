@@ -5,8 +5,9 @@
               xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
     <application>
         <view-handler>com.mycompany.fluidgridmobile.viewhandler.CustomViewHandler</view-handler>
+        <navigation-handler>org.primefaces.mobile.application.MobileNavigationHandler</navigation-handler>
     </application>
     <factory>
-    <!--    <render-kit-factory>org.omnifaces.renderkit.Html5RenderKitFactory</render-kit-factory>-->
+        <!--    <render-kit-factory>org.omnifaces.renderkit.Html5RenderKitFactory</render-kit-factory>-->
     </factory>
 </faces-config>

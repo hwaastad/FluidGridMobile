@@ -1,0 +1,33 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 21.apr.2014, 22:43:05
+    Author     : helge
+*/
+
+.pe-dynaform-cell {  
+    padding-bottom: 8px;  
+}  
+
+.pe-dynaform-label {  
+    text-align: left !important;  
+    padding: 2px 20px 0 0;  
+}  
+
+.pe-dynaform-cell.separator {  
+    padding: 10px 0 10px 0;  
+}  
+
+.pe-dynaform-cell.separator .separatorText {  
+    width: 15%;  
+    padding-left: 0;  
+}  
+
+/* note: trick with colspan is needed for IE8 */  
+.pe-dynaform-cell input,  
+.pe-dynaform-cell[colspan="1"] input {  
+    width: 130px;  
+}  
