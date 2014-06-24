@@ -10,33 +10,42 @@
 
     <ui:define name="metadata">
         <f:metadata>
+            <f:viewParam name="switch_url" value="#{registerController.switchUrl}"/>
+            <f:viewParam name="statusCode" value="#{registerController.statusCode}"/>
+            <f:viewParam name="uuid" value="#{registerController.uuid}"/>
+            <f:event type="preRenderView" listener="#{registerController.initFeedBack()}"/>
         </f:metadata>
     </ui:define>
     <ui:define name="content">
-        <pom:page id="page">
+        <p:growl autoUpdate="true"/>
+        <pom:page id="main">
             <pom:header title="Main"/>
             <pom:content>
                 <h:form id="mainForm">
-                    <p:commandButton value="Start registration" action="#{registerController.prepareNewContact()}" update=":registerForm">
-                       <p:resetInput target=":registerForm"/>
+                    <p:commandButton id="button1" value="Start registration" action="#{registerController.prepareNewContact()}" update=":register:registerForm">
+                        <p:resetInput target=":register:registerForm"/>
                     </p:commandButton>
                 </h:form>
             </pom:content>
         </pom:page>
         <pom:page id="register">
+            <f:facet name="postinit">
+                <h:outputScript name="smartguest.js" library="js" target="head"/>
+            </f:facet>
             <pom:header title="Register">
-                <f:facet name="left"><p:button value="Go Back" icon="back" href="#main?reverse=true"/></f:facet>
+                <p:button styleClass="ui-btn-left ui-btn-inline" value="Go Back" icon="ui-icon-arrow-l" outcome="pm:main?transition=flip"/>
             </pom:header>
             <pom:content>
                 <h:form id="registerForm">
                     <ezcomp:mobile-dynaform indata="#{registerController.model}" id="test"/>
                     <p:commandButton id="registerButton" value="Create"  update="@form" action="#{registerController.saveNewMobile()}"/>
+                    <p:commandButton id="submitButton" value="Submit Action" onclick="submitAction('sdasds');"/>
                 </h:form>
             </pom:content>
         </pom:page>
         <pom:page id="welcome">
             <pom:header title="Welcome">
-                <f:facet name="left"><p:button value="Go Back" icon="back" href="#main?reverse=true"/></f:facet>
+                <p:button styleClass="ui-btn-left ui-btn-inline" value="Go Back" icon="ui-icon-arrow-l" outcome="pm:main?transition=flip"/>
             </pom:header>
             <pom:content>
 

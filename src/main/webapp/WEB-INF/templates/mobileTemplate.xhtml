@@ -3,11 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:poue="http://primefaces.org/ui/extensions">
-    
+      xmlns:poue="http://primefaces.org/ui/extensions"
+      xmlns:f="http://java.sun.com/jsf/core">
+
     <h:head>
         <title>Facelet Title</title>
         <h:outputStylesheet library="css" name="test.css"/>
+        <f:facet name="postinit">
+            <h:outputScript name="smartguest.js" library="js"/>
+        </f:facet>
     </h:head>
     <h:body>
         <ui:insert name="ajaxErrorHandler">

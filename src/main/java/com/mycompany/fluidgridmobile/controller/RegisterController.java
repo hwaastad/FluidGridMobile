@@ -13,6 +13,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import org.omnifaces.cdi.ViewScoped;
+import org.omnifaces.util.Messages;
 import org.primefaces.extensions.model.dynaform.DynaFormControl;
 import org.primefaces.extensions.model.dynaform.DynaFormLabel;
 import org.primefaces.extensions.model.dynaform.DynaFormModel;
@@ -33,10 +34,18 @@ public class RegisterController implements Serializable {
     private static final Logger LOG = LoggerFactory.getLogger(RegisterController.class);
     private List<FluidGridItem> gridItems;
     private DynaFormModel model;
+    private String switchUrl;
+    private String uuid;
+    private String statusCode;
 
     @PostConstruct
     public void init() {
         model = new DynaFormModel();
+    }
+
+    public void initFeedBack() {
+        String s = String.format("StatusCode: %s switchUrl: %s uuid: %s", statusCode, switchUrl, uuid);
+        Messages.addGlobalWarn(s);
     }
 
     public String prepareNewContact() {
@@ -94,6 +103,30 @@ public class RegisterController implements Serializable {
 
     public void setModel(DynaFormModel model) {
         this.model = model;
+    }
+
+    public String getSwitchUrl() {
+        return switchUrl;
+    }
+
+    public void setSwitchUrl(String switchUrl) {
+        this.switchUrl = switchUrl;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public String getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(String statusCode) {
+        this.statusCode = statusCode;
     }
 
 }
